@@ -13,4 +13,18 @@ public class HttpRequestManager
 	private Dictionary<string, string> _headers;
 	private Dictionary<string, string> _queryParameters;
 	private HttpContent _body;
+
+	public HttpRequestManager()
+	{
+		_httpClient = new HttpClient();
+
+		_httpClient.DefaultRequestHeaders.Add("User-Agent", "Wirefetch/1.0");
+		_httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
+		_method = HttpMethod.Get;
+		_headers = new Dictionary<string, string> { };
+		_body = new StringContent("");
+		_queryParameters = new Dictionary<string, string> { };
+		_endpointUrl = "";
+	}
 }
