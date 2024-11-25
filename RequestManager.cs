@@ -14,6 +14,45 @@ public class HttpRequestManager
 	private Dictionary<string, string> _queryParameters;
 	private HttpContent _body;
 
+	private string ConvertToParameters(Dictionary<string, string> parameters)
+	{
+		var query = new StringBuilder();
+
+		if (parameters.Count == 0)
+			return string.Empty;
+
+		query.Append('?', 0);
+
+		foreach (var param in parameters)
+		{
+			if (query.Length > 0)
+			{
+				query.Append('&');
+			}
+
+			query.Append(HttpUtility.UrlEncode(param.Key));
+			query.Append('=');
+			query.Append(HttpUtility.UrlEncode(param.Value));
+		}
+
+		return query.ToString();
+	}
+
+	public void SetMethod(HttpMethod method)
+	{
+		_method = method;
+	}
+
+	public void SetUri(string url)
+	{
+		_endpointUrl = url;
+	}
+
+	public void SetBody(string body)
+	{
+		_body = new StringContent(body);
+	}
+
 	public HttpRequestManager()
 	{
 		_httpClient = new HttpClient();
