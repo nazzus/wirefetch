@@ -53,6 +53,38 @@ public class HttpRequestManager
 		_body = new StringContent(body);
 	}
 
+	public async Task<HttpResponseMessage> MakeRequest()
+	{
+		Uri fullUri = new(_endpointUrl + ConvertToParameters(_queryParameters));
+		HttpRequestMessage request = new(_method, fullUri)
+		{
+			Content = _body,
+		};
+
+		foreach (var header in _headers)
+		{
+			request.Headers.Add(header.Key, header.Value);
+		}
+
+		HttpResponseMessage response;
+
+		try
+		{
+			response = await _httpClient.SendAsync(request);
+		}
+
+		catch (HttpRequestException exception)
+		{
+			response = new HttpResponseMessage(exception.StatusCode ?? HttpStatusCode.NotFound)
+			{
+				ReasonPhrase = exception.Message
+			};
+		}
+
+		return response;
+	}
+
+
 	public HttpRequestManager()
 	{
 		_httpClient = new HttpClient();
