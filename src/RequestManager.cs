@@ -23,7 +23,7 @@ public class HttpRequestManager
 		if (parameters.Count == 0)
 			return string.Empty;
 
-		query.Append('?', 0);
+		query.Append('?');
 
 		foreach (var param in parameters)
 		{
