@@ -7,6 +7,7 @@ namespace Wirefetch;
 
 public class HttpRequestManager
 {
+	// private fields
 	private HttpClient _httpClient;
 	private HttpMethod _method;
 	private string _endpointUrl;
@@ -14,6 +15,7 @@ public class HttpRequestManager
 	private Dictionary<string, string> _queryParameters;
 	private HttpContent _body;
 
+	// private methods
 	private string ConvertToParameters(Dictionary<string, string> parameters)
 	{
 		var query = new StringBuilder();
@@ -38,6 +40,7 @@ public class HttpRequestManager
 		return query.ToString();
 	}
 
+	// public methods
 	public void SetMethod(HttpMethod method)
 	{
 		_method = method;
