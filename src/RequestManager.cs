@@ -16,7 +16,7 @@ public class HttpRequestManager
 	private HttpContent _body;
 
 	// private methods
-	private string ConvertToParameters(Dictionary<string, string> parameters)
+	private static string ConvertToParameters(Dictionary<string, string> parameters)
 	{
 		var query = new StringBuilder();
 
