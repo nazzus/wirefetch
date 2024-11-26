@@ -56,6 +56,16 @@ public class HttpRequestManager
 		_body = new StringContent(body);
 	}
 
+	public void AddQueryParameter(string key, string value)
+	{
+		_queryParameters.Add(key, value);
+	}
+
+	public void AddHeader(string key, string value)
+	{
+		_queryParameters.Add(key, value);
+	}
+
 	public async Task<HttpResponseMessage> MakeRequest()
 	{
 		Uri fullUri = new(_endpointUrl + ConvertToParameters(_queryParameters));
