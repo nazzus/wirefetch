@@ -10,9 +10,11 @@ public class RequestManagerTests
     private readonly HttpRequestManager _requestManager;
 
     [Fact]
-    public async void GetRequest()
+    public async void GetRequestWithQueryParams()
     {
-        _requestManager.SetUri("https://postman-echo.com/get?hello=world");
+        _requestManager.SetUri("https://postman-echo.com/get");
+        _requestManager.AddQueryParameter("hello", "world");
+        _requestManager.AddQueryParameter("this", "is a message");
         HttpResponseMessage resp = await _requestManager.MakeRequest();
 
         Debug.WriteLine(await resp.Content.ReadAsStringAsync());
@@ -21,7 +23,7 @@ public class RequestManagerTests
     }
 
     [Fact]
-    public async void PostRequest()
+    public async void PostRequestWithBody()
     {
         var body = new
         {
