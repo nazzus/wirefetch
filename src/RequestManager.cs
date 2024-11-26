@@ -8,11 +8,11 @@ namespace Wirefetch;
 public class HttpRequestManager
 {
 	// private fields
-	private HttpClient _httpClient;
+	private readonly HttpClient _httpClient;
 	private HttpMethod _method;
 	private string _endpointUrl;
-	private Dictionary<string, string> _headers;
-	private Dictionary<string, string> _queryParameters;
+	private readonly Dictionary<string, string> _headers;
+	private readonly Dictionary<string, string> _queryParameters;
 	private HttpContent _body;
 
 	// private methods
